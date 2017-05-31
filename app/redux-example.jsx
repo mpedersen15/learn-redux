@@ -1,19 +1,32 @@
 var redux = require('redux');
 
-console.log('starting redux 2 example');
-
 var defaultState = {
-  searchText: '',
-  showCompleted: false,
-  todos: []
+  name: 'Anonymous',
 };
 
 var reducer = (state = defaultState , action) => {
-  return state;
+
+  console.log('new action', action);
+
+  switch(action.type){
+    case 'CHANGE_NAME':
+      console.log('action type is CHANGE_NAME', action.name);
+      return {
+        ...state,
+        name: action.name
+      };
+    default:
+    return state;
+  }
 };
 
 var store = redux.createStore(reducer);
 
-var currentState = store.getState();
+console.log('name should be Anonymous', store.getState());
 
-console.log('currentState', currentState);
+store.dispatch({
+  type: 'CHANGE_NAME',
+  name: 'Matt'
+});
+
+console.log('name should be Matt', store.getState());
