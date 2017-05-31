@@ -1,14 +1,8 @@
 var redux = require('redux');
 
-console.log('starting redux 2 example');
+console.log('starting redux todo example');
 
-var defaultState = {
-  searchText: '',
-  showCompleted: false,
-  todos: []
-};
-
-var reducer = (state = defaultState , action) => {
+var reducer = (state = {searchText: '', showCompleted: false, todos: []}, action) => {
   return state;
 };
 
