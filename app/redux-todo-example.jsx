@@ -87,35 +87,6 @@ var reducer = redux.combineReducers({
   todos: todosReducer
 });
 
-/*var reducer = (state = defaultState , action) => {
-  switch(action.type){
-    case 'CHANGE_SEARCH_TEXT':
-      return {
-        ...state,
-        searchText: action.searchText
-      };
-    case 'ADD_TODO':
-      // add a todo to state
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          {
-            id: nextTodoId++,
-            text: action.text
-          }
-        ]
-      }
-    case 'REMOVE_TODO':
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.id)
-      }
-    default:
-      return state;
-  }
-};*/
-
 var store = redux.createStore(reducer, redux.compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
@@ -130,23 +101,13 @@ var unsubscribe = store.subscribe( () => {
 
 // unsubscribe();
 
-var currentState = store.getState();
-
-var action = {
-  type: 'CHANGE_SEARCH_TEXT',
-  searchText: 'New search text'
-};
-
-store.dispatch(action);
-
+store.dispatch(changeSearchText('New search text'));
 store.dispatch(changeSearchText('New new search text'));
-
 store.dispatch(changeSearchText('Super new search text'));
 
 store.dispatch(addTodo('A very new todo'));
 store.dispatch(addTodo('A super new todo'));
 store.dispatch(addTodo('A third new todo'));
-
 store.dispatch(removeTodo(1));
 
 store.dispatch(changeShowCompleted(true));
